@@ -7,9 +7,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-subdomain = os.getenv("ZD_SUBDOMAIN")
-email = os.getenv("ZD_EMAIL")
-token = os.getenv("ZD_TOKEN")
+subdomain = os.getenv("SUBDOMAIN")
+email = os.getenv("EMAIL")
+token = os.getenv("TOKEN")
 
 auth = (f"{email}/token", token)
 base_url = f"https://{subdomain}.zendesk.com/api/v2"
@@ -38,7 +38,7 @@ def get_comments(ticket_id):
         return get_comments(ticket_id)
 
     else:
-        print(f"Skpping ticket {ticket_id}: Error {response.status_code}")
+        print(f"Skipping ticket {ticket_id}: Error {response.status_code}")
         return []
 
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
             print(f"Processing ticket #{ids}.")
             comments = get_comments(ids)
 
-            # Internal Comment only filter
+            # internal comment only filter #
             internal_comments = [c for c in comments if c["public"] is False]
             if not internal_comments:
                 continue
